@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" class="dark:bg-gray-900">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E40AF',
+                        secondary: '#F59E0B',
+                        accent: '#10B981',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: { '0%': { transform: 'translateY(20px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 font-sans flex flex-col min-h-screen transition-colors duration-300">
+    <!-- 
+    
+
+     Interactive Register Page -->
+    <section class="flex-grow py-16 bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-700">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-extrabold text-center mb-12 text-primary dark:text-white animate-fade-in">Join
+                UniHub</h2>
+            <div class="max-w-md mx-auto bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg animate-slide-up">
+                <form>
+                    <div class="mb-6">
+                        <label for="name" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Full
+                            Name</label>
+                        <input type="text" id="name"
+                            class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            placeholder="e.g., John Smith" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="email" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">University
+                            Email</label>
+                        <input type="email" id="email"
+                            class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            placeholder="e.g., john.smith@university.edu" pattern="[a-zA-Z0-9._%+-]+@university\.edu$"
+                            required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="role" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Role</label>
+                        <select id="role"
+                            class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            required>
+                            <option value="" disabled selected>Select your role</option>
+                            <option value="student">Student</option>
+                            <option value="faculty">Faculty</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label for="password"
+                            class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Password</label>
+                        <input type="password" id="password"
+                            class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            placeholder="Enter your password" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="confirm-password"
+                            class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Confirm Password</label>
+                        <input type="password" id="confirm-password"
+                            class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            placeholder="Confirm your password" required>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition transform hover:scale-105 shadow-lg dark:bg-gray-700 dark:hover:bg-yellow-400">Sign
+                        Up</button>
+                </form>
+                <p class="text-center mt-6 text-gray-600 dark:text-gray-300">Already have an account? <a
+                        href="/login.html"
+                        class="text-primary hover:text-secondary font-medium transition dark:text-white dark:hover:text-yellow-400">Log
+                        In</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary dark:bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center">
+                <h3 class="text-xl font-bold mb-2 tracking-tight">UniHub</h3>
+                <p class="text-sm mb-4">Empowering your academic journey</p>
+            </div>
+            <div class="mt-6 text-center text-sm">
+                <p>© 2025 UniHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const toggleTheme = () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        };
+        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+        document.getElementById('mobile-theme-toggle').addEventListener('click', toggleTheme);
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+    </script>
+</body>
+
+</html>
