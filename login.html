@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" class="dark:bg-gray-900">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -29,7 +28,6 @@
         }
     </script>
 </head>
-
 <body class="bg-gray-100 dark:bg-gray-900 font-sans flex flex-col min-h-screen transition-colors duration-300">
     <!-- Responsive Navbar -->
     <nav class="bg-primary dark:bg-gray-800 text-white shadow-lg sticky top-0 z-50">
@@ -42,7 +40,7 @@
                 <a href="cgpa-tracker.html" class="hover:text-secondary transition duration-300">CGPA Tracker</a>
                 <a href="user-profile.html" class="hover:text-secondary transition duration-300">Profile</a>
                 <a href="deshboard.html" class="hover:text-secondary transition duration-300">Dashboard</a>
-                <a href="login.html" class="bg-secondary hover:bg-yellow-500 px-3 py-1 rounded transition duration-300">Log In</a>
+                <a href="register.html" class="bg-secondary hover:bg-yellow-500 px-3 py-1 rounded transition duration-300">Sign Up</a>
                 <button id="theme-toggle" class="p-2 rounded-full hover:bg-secondary transition">
                     <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
@@ -61,68 +59,29 @@
             <a href="cgpa-tracker.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">CGPA Tracker</a>
             <a href="user-profile.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Profile</a>
             <a href="deshboard.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Dashboard</a>
-            <a href="login.html" class="block px-4 py-2 bg-secondary hover:bg-yellow-500 hover:text-white transition duration-300">Log In</a>
+            <a href="register.html" class="block px-4 py-2 bg-secondary hover:bg-yellow-500 hover:text-white transition duration-300">Sign Up</a>
             <button id="mobile-theme-toggle" class="block px-4 py-2 w-full text-left hover:bg-secondary hover:text-white transition duration-300">Toggle Theme</button>
         </div>
     </nav>
 
     <!-- 
-    
-
-     Interactive Register Page -->
+ Interactive Login Page -->
     <section class="flex-grow py-16 bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-700">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-extrabold text-center mb-12 text-primary dark:text-white animate-fade-in">Join
-                UniHub</h2>
+            <h2 class="text-4xl font-extrabold text-center mb-12 text-primary dark:text-white animate-fade-in">Log In to UniHub</h2>
             <div class="max-w-md mx-auto bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg animate-slide-up">
-                <form id="registerForm">
+                <form id="loginForm">
                     <div class="mb-6">
-                        <label for="name" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Full
-                            Name</label>
-                        <input type="text" id="name"
-                            class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            placeholder="e.g., John Smith" required>
+                        <label for="email" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">DIU Email</label>
+                        <input type="email" id="email" class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="e.g., john.smith@diu.edu.bd" pattern="[a-zA-Z0-9._%+-]+@diu\.edu\.bd$" required>
                     </div>
                     <div class="mb-6">
-                        <label for="email" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">DIU
-                            Email</label>
-                        <input type="email" id="email"
-                            class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            placeholder="e.g., john.smith@diu.edu.bd" pattern="[a-zA-Z0-9._%+-]+@diu\.edu\.bd$"
-                            required>
+                        <label for="password" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Password</label>
+                        <input type="password" id="password" class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="Enter your password" required>
                     </div>
-                    <div class="mb-6">
-                        <label for="role" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Role</label>
-                        <select id="role"
-                            class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            required>
-                            <option value="" disabled selected>Select your role</option>
-                            <option value="student">Student</option>
-                            <option value="faculty">Faculty</option>
-                        </select>
-                    </div>
-                    <div class="mb-6">
-                        <label for="password"
-                            class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Password</label>
-                        <input type="password" id="password"
-                            class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            placeholder="Enter your password" required>
-                    </div>
-                    <div class="mb-6">
-                        <label for="confirm-password"
-                            class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Confirm Password</label>
-                        <input type="password" id="confirm-password"
-                            class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            placeholder="Confirm your password" required>
-                    </div>
-                    <button type="submit"
-                        class="w-full bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition transform hover:scale-105 shadow-lg dark:bg-gray-700 dark:hover:bg-yellow-400">Sign
-                        Up</button>
+                    <button type="submit" class="w-full bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition transform hover:scale-105 shadow-lg dark:bg-gray-700 dark:hover:bg-yellow-400">Log In</button>
                 </form>
-                <p class="text-center mt-6 text-gray-600 dark:text-gray-300">Already have an account? <a
-                        href="login.html"
-                        class="text-primary hover:text-secondary font-medium transition dark:text-white dark:hover:text-yellow-400">Log
-                        In</a></p>
+                <p class="text-center mt-6 text-gray-600 dark:text-gray-300">Don't have an account? <a href="register.html" class="text-primary hover:text-secondary font-medium transition dark:text-white dark:hover:text-yellow-400">Sign Up</a></p>
             </div>
         </div>
     </section>
@@ -149,64 +108,44 @@
         
         // Apply saved theme on page load
         if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
-
+        
         // Add event listeners for theme toggle buttons
         document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
         document.getElementById('mobile-theme-toggle').addEventListener('click', toggleTheme);
-
-        // Handle registration form submission
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
+        
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
-            const role = document.getElementById('role').value;
             const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
             
             // Basic validation
-            if (!name || !email || !role || !password || !confirmPassword) {
+            if (!email || !password) {
                 alert('Please fill in all fields');
                 return;
             }
             
             // Check if email ends with @diu.edu.bd
             if (!email.endsWith('@diu.edu.bd')) {
-                alert('Please use a valid DIU email address (@diu.edu.bd)');
+                alert('Please use a valid DIU email address');
                 return;
             }
             
-            // Check if passwords match
-            if (password !== confirmPassword) {
-                alert('Passwords do not match');
-                return;
-            }
+            // Simulate login process
+            alert('Login successful! Redirecting to dashboard...');
             
-            // Check password strength (minimum 6 characters)
-            if (password.length < 6) {
-                alert('Password must be at least 6 characters long');
-                return;
-            }
+            // Store user session (simple simulation)
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('isLoggedIn', 'true');
             
-            // Simulate registration process
-            alert('Registration successful! Redirecting to login page...');
-            
-            // Store user data (simple simulation)
-            const userData = {
-                name: name,
-                email: email,
-                role: role,
-                registeredAt: new Date().toISOString()
-            };
-            
-            localStorage.setItem('registeredUser', JSON.stringify(userData));
-            
-            // Redirect to login page
+            // Redirect to dashboard page
             setTimeout(() => {
-                window.location.href = 'login.html';
+                window.location.href = 'deshboard.html';
             }, 1000);
+            
+            console.log('User logged in:', email);
         });
     </script>
 </body>
-
 </html>
