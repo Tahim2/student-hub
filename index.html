@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>University Academic Hub - Landing</title>
+    <title>UniHub - DIU Academic Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -18,6 +18,8 @@
                     animation: {
                         'fade-in': 'fadeIn 1s ease-in-out',
                         'slide-up': 'slideUp 0.5s ease-out',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
                     },
                     keyframes: {
                         fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
@@ -32,14 +34,16 @@
     <!-- Responsive Navbar -->
     <nav class="bg-primary dark:bg-gray-800 text-white shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="/" class="text-2xl font-bold tracking-tight">UniHub</a>
+            <a href="index.html" class="text-2xl font-bold tracking-tight">UniHub</a>
             <div class="hidden md:flex space-x-6 items-center">
-                <a href="/" class="hover:text-secondary transition duration-300">Home</a>
-                <a href="/faculty-reviews.html" class="hover:text-secondary transition duration-300">Faculty Reviews</a>
-                <a href="/resource-hub.html" class="hover:text-secondary transition duration-300">Resource Hub</a>
-                <a href="/cgpa-tracker.html" class="hover:text-secondary transition duration-300">CGPA Tracker</a>
-                <a href="/user-profile.html" class="hover:text-secondary transition duration-300">Profile</a>
-                <a href="/dashboard.html" class="hover:text-secondary transition duration-300">Dashboard</a>
+                <a href="index.html" class="text-secondary font-medium border-b-2 border-secondary">Home</a>
+                <a href="faculty-reviews.html" class="hover:text-secondary transition duration-300">Faculty Reviews</a>
+                <a href="resource-hub.html" class="hover:text-secondary transition duration-300">Resource Hub</a>
+                <a href="cgpa-tracker.html" class="hover:text-secondary transition duration-300">CGPA Tracker</a>
+                <a href="user-profile.html" class="hover:text-secondary transition duration-300">Profile</a>
+                <a href="dashboard.html" class="hover:text-secondary transition duration-300">Dashboard</a>
+                <a href="login.html" class="bg-secondary hover:bg-yellow-500 px-3 py-1 rounded transition duration-300">Log In</a>
+                <a href="register.html" class="bg-accent hover:bg-green-600 px-3 py-1 rounded transition duration-300">Sign Up</a>
                 <button id="theme-toggle" class="p-2 rounded-full hover:bg-secondary transition">
                     <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
@@ -52,63 +56,243 @@
             </button>
         </div>
         <div id="mobile-menu" class="hidden md:hidden bg-primary dark:bg-gray-800 transition-all duration-300 ease-in-out">
-            <a href="/" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Home</a>
-            <a href="/faculty-reviews.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Faculty Reviews</a>
-            <a href="/resource-hub.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Resource Hub</a>
-            <a href="/cgpa-tracker.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">CGPA Tracker</a>
-            <a href="/user-profile.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Profile</a>
-            <a href="/dashboard.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Dashboard</a>
+            <a href="index.html" class="block px-4 py-2 bg-secondary text-white">Home</a>
+            <a href="faculty-reviews.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Faculty Reviews</a>
+            <a href="resource-hub.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Resource Hub</a>
+            <a href="cgpa-tracker.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">CGPA Tracker</a>
+            <a href="user-profile.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Profile</a>
+            <a href="dashboard.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Dashboard</a>
+            <a href="login.html" class="block px-4 py-2 bg-secondary hover:bg-yellow-500 hover:text-white transition duration-300">Log In</a>
+            <a href="register.html" class="block px-4 py-2 bg-accent hover:bg-green-600 hover:text-white transition duration-300">Sign Up</a>
             <button id="mobile-theme-toggle" class="block px-4 py-2 w-full text-left hover:bg-secondary hover:text-white transition duration-300">Toggle Theme</button>
         </div>
     </nav>
 
-    <!-- Interactive Landing Page -->
-    <section class="flex-grow min-h-screen bg-gradient-to-br from-primary to-indigo-700 dark:from-gray-800 dark:to-gray-600 flex flex-col justify-center items-center text-white">
+    <!-- Hero Section -->
+    <section class="flex-grow min-h-screen bg-gradient-to-br from-primary via-indigo-600 to-purple-700 dark:from-gray-800 dark:via-gray-700 dark:to-gray-600 flex flex-col justify-center items-center text-white">
         <header class="text-center px-4 animate-fade-in">
-            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">Welcome to UniHub</h1>
-            <p class="text-xl md:text-3xl mb-10 max-w-2xl mx-auto animate-slide-up">Your ultimate platform for faculty reviews, shared resources, and CGPA tracking. Join thousands of students and faculty!</p>
-            <div class="space-x-4">
-                <a href="/login.html" class="bg-secondary text-primary px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-300 transition transform hover:scale-105 shadow-lg dark:bg-yellow-400 dark:hover:bg-yellow-500">Log In</a>
-                <a href="/register.html" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-primary transition transform hover:scale-105 shadow-lg dark:border-gray-300 dark:hover:bg-gray-300 dark:hover:text-gray-900">Sign Up</a>
-            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">Welcome to <span class="text-secondary">UniHub</span></h1>
+            <p class="text-xl md:text-2xl mb-4 max-w-3xl mx-auto">Your Ultimate DIU Academic Platform</p>
+            <p class="text-lg md:text-xl mb-10 max-w-4xl mx-auto opacity-90 animate-slide-up">Faculty reviews, shared resources, and CGPA tracking - all in one place. Join thousands of DIU students enhancing their academic journey!</p>
         </header>
-        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl animate-slide-up">
-            <div class="bg-white bg-opacity-20 p-6 rounded-xl backdrop-blur-md hover:bg-opacity-30 transition duration-300">
-                <h3 class="text-xl font-semibold">Explore Reviews</h3>
-                <p class="text-sm mt-2">Discover insights from peers about faculty and courses.</p>
+    </section>
+
+    <!-- Feature Showcase -->
+    <section class="py-16 bg-white dark:bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-primary dark:text-white">Why Choose UniHub?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Faculty Reviews -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-700 dark:to-gray-600 p-8 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 animate-slide-up">
+                    <div class="text-center">
+                        <div class="bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 text-primary dark:text-white">Faculty Reviews</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Discover what students say about professors and courses. Make informed decisions for your academic journey.</p>
+                        <div class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                            <span class="font-semibold text-accent">500+</span> Reviews • <span class="font-semibold text-accent">150+</span> Faculty
+                        </div>
+                        <a href="faculty-reviews.html" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">Browse Reviews</a>
+                    </div>
+                </div>
+                <!-- Resource Hub -->
+                <div class="bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-700 dark:to-gray-600 p-8 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 animate-slide-up">
+                    <div class="text-center">
+                        <div class="bg-accent text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 text-accent dark:text-white">Resource Hub</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Access course materials, notes, past papers, and study guides shared by the DIU community.</p>
+                        <div class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                            <span class="font-semibold text-accent">1,000+</span> Resources • <span class="font-semibold text-accent">50+</span> Courses
+                        </div>
+                        <a href="resource-hub.html" class="bg-accent text-white px-6 py-2 rounded-full hover:bg-green-700 transition">Explore Resources</a>
+                    </div>
+                </div>
+
+                <!-- CGPA Tracker -->
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-100 dark:from-gray-700 dark:to-gray-600 p-8 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-2 animate-slide-up">
+                    <div class="text-center">
+                        <div class="bg-secondary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-semibold mb-4 text-secondary dark:text-white">CGPA Tracker</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Monitor your academic progress with our intuitive CGPA calculator and semester tracking.</p>
+                        <div class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                            Track <span class="font-semibold text-secondary">GPA</span> • <span class="font-semibold text-secondary">Semester</span> Analysis
+                        </div>
+                        <a href="cgpa-tracker.html" class="bg-secondary text-white px-6 py-2 rounded-full hover:bg-yellow-600 transition">Start Tracking</a>
+                    </div>
+                </div>
             </div>
-            <div class="bg-white bg-opacity-20 p-6 rounded-xl backdrop-blur-md hover:bg-opacity-30 transition duration-300">
-                <h3 class="text-xl font-semibold">Share Resources</h3>
-                <p class="text-sm mt-2">Access and contribute to a rich library of study materials.</p>
-            </div>
-            <div class="bg-white bg-opacity-20 p-6 rounded-xl backdrop-blur-md hover:bg-opacity-30 transition duration-300">
-                <h3 class="text-xl font-semibold">Track Progress</h3>
-                <p class="text-sm mt-2">Monitor your CGPA with our intuitive tracker.</p>
+        </div>
+    </section>
+    <!-- Community Stats -->
+    <section class="py-16 bg-gray-50 dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-primary dark:text-white">Join Our Growing Community</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl font-bold text-primary dark:text-secondary mb-2 animate-pulse-slow">1,234</div>
+                    <div class="text-gray-600 dark:text-gray-300">Active Students</div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl font-bold text-accent mb-2 animate-pulse-slow">2,567</div>
+                    <div class="text-gray-600 dark:text-gray-300">Total Reviews</div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl font-bold text-secondary mb-2 animate-pulse-slow">1,890</div>
+                    <div class="text-gray-600 dark:text-gray-300">Resources Shared</div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl font-bold text-purple-600 mb-2 animate-pulse-slow">150+</div>
+                    <div class="text-gray-600 dark:text-gray-300">Faculty Members</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-primary dark:bg-gray-800 text-white py-8">
+    <!-- Quick Access -->
+    <section class="py-16 bg-white dark:bg-gray-800">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col items-center">
-                <h3 class="text-xl font-bold mb-2 tracking-tight">UniHub</h3>
-                <p class="text-sm mb-4">Empowering your academic journey</p>
+            <h2 class="text-4xl font-bold text-center mb-12 text-primary dark:text-white">Quick Access</h2>
+            <div class="max-w-4xl mx-auto">
+                <!-- Search Bar -->
+                <div class="mb-8">
+                    <div class="relative">
+                        <input type="text" placeholder="Search faculty, courses, or resources..." class="w-full p-4 border-2 border-primary rounded-full focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white pl-12">
+                        <svg class="w-6 h-6 absolute left-4 top-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <!-- Quick Actions -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <button class="bg-primary text-white p-6 rounded-xl hover:bg-blue-700 transition transform hover:scale-105 shadow-lg">
+                        <svg class="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                        </svg>
+                        Submit a Review
+                    </button>
+                    <button class="bg-accent text-white p-6 rounded-xl hover:bg-green-700 transition transform hover:scale-105 shadow-lg">
+                        <svg class="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        </svg>
+                        Upload Resource
+                    </button>
+                    <button class="bg-secondary text-white p-6 rounded-xl hover:bg-yellow-600 transition transform hover:scale-105 shadow-lg">
+                        <svg class="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                        </svg>
+                        Update CGPA
+                    </button>
+                </div>
             </div>
-            <div class="mt-6 text-center text-sm">
-                <p>© 2025 UniHub. All rights reserved.</p>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-primary dark:bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 tracking-tight">UniHub</h3>
+                    <p class="text-sm mb-4 opacity-90">Empowering DIU students with comprehensive academic tools and community-driven resources.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="faculty-reviews.html" class="hover:text-secondary transition">Faculty Reviews</a></li>
+                        <li><a href="resource-hub.html" class="hover:text-secondary transition">Resource Hub</a></li>
+                        <li><a href="cgpa-tracker.html" class="hover:text-secondary transition">CGPA Tracker</a></li>
+                        <li><a href="dashboard.html" class="hover:text-secondary transition">Dashboard</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-secondary transition">Help Center</a></li>
+                        <li><a href="#" class="hover:text-secondary transition">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-secondary transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-secondary transition">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Connect</h4>
+                    <p class="text-sm mb-4">Stay updated with UniHub news and features</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="hover:text-secondary transition">📧</a>
+                        <a href="#" class="hover:text-secondary transition">📱</a>
+                        <a href="#" class="hover:text-secondary transition">🌐</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-blue-600 text-center text-sm">
+                <p>© 2025 UniHub - Daffodil International University. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Theme toggle functionality
         const toggleTheme = () => {
             document.documentElement.classList.toggle('dark');
             localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
         };
+        
+        // Apply saved theme on page load
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+        
+        // Add event listeners for theme toggle buttons
         document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
         document.getElementById('mobile-theme-toggle').addEventListener('click', toggleTheme);
-        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+
+        // Check if user is logged in and show personalized content
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        const userEmail = localStorage.getItem('userEmail');
+        
+        if (isLoggedIn === 'true' && userEmail) {
+            // Could add personalized welcome message or quick stats here
+            console.log('Welcome back:', userEmail);
+        }
+
+        // Add smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        // Add search functionality (basic implementation)
+    const searchInput = document.querySelector('input[placeholder*="Search"]');
+     if (searchInput) {
+         searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = this.value.trim();
+                    if (query) {
+                        // Redirect to appropriate page based on search
+                     if (query.toLowerCase().includes('faculty') || query.toLowerCase().includes('teacher')) {
+                            window.location.href = 'faculty-reviews.html';
+                        } else if (query.toLowerCase().includes('resource') || query.toLowerCase().includes('material')) {
+                            window.location.href = 'resource-hub.html';
+                        } else if (query.toLowerCase().includes('cgpa') || query.toLowerCase().includes('grade')) {
+                            window.location.href = 'cgpa-tracker.html';
+                        } else {
+                            // Default to faculty reviews for general searches
+                            window.location.href = 'faculty-reviews.html';
+                        }
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>
