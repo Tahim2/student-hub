@@ -529,18 +529,19 @@
                 const course = courses.find(c => c.id === resource.courseId);
                 const resourceDiv = document.createElement('div');
                 resourceDiv.className = 'p-4 bg-gray-50 dark:bg-gray-700 rounded-lg flex flex-col space-y-2';
-                resourceDiv.innerHTML = `
-                    <p class="text-gray-700 dark:text-gray-300"><strong>Title:</strong> ${resource.title}</p>
-                    <p class="text-gray-700 dark:text-gray-300"><strong>Course:</strong> ${course.name}</p>
-                    <p class="text-gray-700 dark:text-gray-300"><strong>Tags:</strong> ${resource.tags.join(', ')}</p>
-                    <p class="text-gray-700 dark:text-gray-300"><strong>Status:</strong> ${resource.approved ? 'Approved' : 'Pending'}</p>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm">By ${resource.studentId} (Batch ${resource.batch})</p>
-                    ${resource.type === 'file' ? <a href="${resource.link}" target="_blank" class="text-accent hover:underline">Download/View</a> : <a href="${resource.link}" target="_blank" class="text-accent hover:underline">Visit Link</a>}
-                    <div class="flex space-x-2">
+                resourceDiv.innerHTML =
+                    `<p class="text-gray-700 dark:text-gray-300"><strong>Title:</strong> ${resource.title}</p>` +
+                    `<p class="text-gray-700 dark:text-gray-300"><strong>Course:</strong> ${course.name}</p>` +
+                    `<p class="text-gray-700 dark:text-gray-300"><strong>Tags:</strong> ${resource.tags.join(', ')}</p>` +
+                    `<p class="text-gray-700 dark:text-gray-300"><strong>Status:</strong> ${resource.approved ? 'Approved' : 'Pending'}</p>` +
+                    `<p class="text-gray-600 dark:text-gray-400 text-sm">By ${resource.studentId} (Batch ${resource.batch})</p>` +
+                    (resource.type === 'file'
+                        ? `<a href="${resource.link}" target="_blank" class="text-accent hover:underline">Download/View</a>`
+                        : `<a href="${resource.link}" target="_blank" class="text-accent hover:underline">Visit Link</a>`) +
+                    `<div class="flex space-x-2">
                         <button class="approve-resource bg-accent text-white px-3 py-1 rounded-lg hover:bg-green-700 transition" data-id="${resource.id}">Approve</button>
                         <button class="delete-resource bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition" data-id="${resource.id}">Delete</button>
-                    </div>
-                `;
+                    </div>`;
                 moderationDiv.appendChild(resourceDiv);
 
                 resourceDiv.querySelector('.approve-resource').addEventListener('click', () => {
