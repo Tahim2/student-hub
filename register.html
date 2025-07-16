@@ -31,40 +31,7 @@
 </head>
 
 <body class="bg-gray-100 dark:bg-gray-900 font-sans flex flex-col min-h-screen transition-colors duration-300">
-    <!-- Responsive Navbar -->
-    <nav class="bg-primary dark:bg-gray-800 text-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold tracking-tight">UniHub</a>
-            <div class="hidden md:flex space-x-6 items-center">
-                <a href="index.html" class="hover:text-secondary transition duration-300">Home</a>
-                <a href="faculty-reviews.html" class="hover:text-secondary transition duration-300">Faculty Reviews</a>
-                <a href="resource-hub.html" class="hover:text-secondary transition duration-300">Resource Hub</a>
-                <a href="cgpa-tracker.html" class="hover:text-secondary transition duration-300">CGPA Tracker</a>
-                <a href="user-profile.html" class="hover:text-secondary transition duration-300">Profile</a>
-                <a href="deshboard.html" class="hover:text-secondary transition duration-300">Dashboard</a>
-                <a href="login.html" class="bg-secondary hover:bg-yellow-500 px-3 py-1 rounded transition duration-300">Log In</a>
-                <button id="theme-toggle" class="p-2 rounded-full hover:bg-secondary transition">
-                    <svg class="w-5 h-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                    <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                </button>
-            </div>
-            <button class="md:hidden focus:outline-none" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-primary dark:bg-gray-800 transition-all duration-300 ease-in-out">
-            <a href="index.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Home</a>
-            <a href="faculty-reviews.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Faculty Reviews</a>
-            <a href="resource-hub.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Resource Hub</a>
-            <a href="cgpa-tracker.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">CGPA Tracker</a>
-            <a href="user-profile.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Profile</a>
-            <a href="deshboard.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Dashboard</a>
-            <a href="login.html" class="block px-4 py-2 bg-secondary hover:bg-yellow-500 hover:text-white transition duration-300">Log In</a>
-            <button id="mobile-theme-toggle" class="block px-4 py-2 w-full text-left hover:bg-secondary hover:text-white transition duration-300">Toggle Theme</button>
-        </div>
-    </nav>
+    <!-- ...existing code... -->
 
     <!-- 
     
@@ -88,7 +55,7 @@
                             Email</label>
                         <input type="email" id="email"
                             class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            placeholder="e.g., john.smith@diu.edu.bd" pattern="[a-zA-Z0-9._%+-]+@diu\.edu\.bd$"
+                            placeholder="e.g., habiby15-4750@diu.edu.bd" pattern="^[a-zA-Z0-9.-]+@diu\.edu\.bd$"
                             required>
                     </div>
                     <div class="mb-6">
@@ -150,61 +117,59 @@
         // Apply saved theme on page load
         if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
 
-        // Add event listeners for theme toggle buttons
-        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-        document.getElementById('mobile-theme-toggle').addEventListener('click', toggleTheme);
+        // Add event listeners for theme toggle buttons (if they exist)
+        const themeToggle = document.getElementById('theme-toggle');
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+        if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
 
         // Handle registration form submission
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const role = document.getElementById('role').value;
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
-            
             // Basic validation
             if (!name || !email || !role || !password || !confirmPassword) {
                 alert('Please fill in all fields');
                 return;
             }
-            
-            // Check if email ends with @diu.edu.bd
-            if (!email.endsWith('@diu.edu.bd')) {
-                alert('Please use a valid DIU email address (@diu.edu.bd)');
+            if (!/^[a-zA-Z0-9.-]+@diu\.edu\.bd$/.test(email)) {
+                alert('Please use a valid DIU email address (e.g., habiby15-4750@diu.edu.bd)');
                 return;
             }
-            
-            // Check if passwords match
             if (password !== confirmPassword) {
                 alert('Passwords do not match');
                 return;
             }
-            
-            // Check password strength (minimum 6 characters)
             if (password.length < 6) {
                 alert('Password must be at least 6 characters long');
                 return;
             }
-            
-            // Simulate registration process
-            alert('Registration successful! Redirecting to login page...');
-            
             // Store user data (simple simulation)
             const userData = {
                 name: name,
                 email: email,
                 role: role,
+                password: password,
                 registeredAt: new Date().toISOString()
             };
-            
             localStorage.setItem('registeredUser', JSON.stringify(userData));
-            
-            // Redirect to login page
-            setTimeout(() => {
+            console.log('Registration successful! Redirecting to login page...');
+            try {
                 window.location.href = 'login.html';
-            }, 1000);
+            } catch (err) {
+                console.error('Redirect error:', err);
+                document.body.innerHTML += '<div style="text-align:center;margin:2em;"><a href="login.html" style="font-size:1.5em;color:#1E40AF;">Go to Login Page</a></div>';
+            }
+            // Fallback: show manual link if redirect fails after 2 seconds
+            setTimeout(function() {
+                if (window.location.pathname.indexOf('login.html') === -1) {
+                    document.body.innerHTML += '<div style="text-align:center;margin:2em;"><a href="login.html" style="font-size:1.5em;color:#1E40AF;">Go to Login Page</a></div>';
+                }
+            }, 2000);
         });
     </script>
 </body>
