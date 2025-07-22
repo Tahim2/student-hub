@@ -1,177 +1,441 @@
 <!DOCTYPE html>
-<html lang="en" class="dark:bg-gray-900">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Register - Academic Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style/styles.css">
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/10 backdrop-blur-md border-b border-white/20">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white/20 p-2 rounded-lg">
+                        <i class="fas fa-graduation-cap text-white text-xl"></i>
+                    </div>
+                    <h1 class="text-white text-xl font-bold">Academic Hub</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="http://127.0.0.1:8000/login"
+                        class="text-white/80 hover:text-white transition-colors">Already have an account?</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-6 py-12">
+        <div class="max-w-md mx-auto">
+            <!-- Registration Form -->
+            <div class="bg-white rounded-2xl shadow-2xl p-8 animate-fade-in">
+                <div class="text-center mb-8">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-plus text-blue-600 text-2xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Create Account</h2>
+                    <p class="text-gray-600">Join the Academic Hub community</p>
+                </div>
+
+                <form method="POST" action="http://127.0.0.1:8000/register" class="space-y-6"
+                    onsubmit="return validateForm(event)">
+                    <input type="hidden" name="_token" value="qXPXzKpLxw4J13ppphPVJeWBSdhjzwDaMHkez12j"
+                        autocomplete="off">
+                    <!-- Display All Validation Errors -->
+
+                    <!-- Role Selection -->
+                    <div class="space-y-3">
+                        <label class="text-gray-700 font-medium">Select Your Role</label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="role-card border-2 border-gray-200 rounded-lg p-4 text-center"
+                                onclick="selectRole('student')">
+                                <input type="radio" name="role" value="student" class="hidden" required>
+                                <i class="fas fa-user-graduate text-blue-500 text-xl mb-2"></i>
+                                <div class="text-sm font-medium text-gray-700">Student</div>
+                            </div>
+                            <div class="role-card border-2 border-gray-200 rounded-lg p-4 text-center"
+                                onclick="selectRole('faculty')">
+                                <input type="radio" name="role" value="faculty" class="hidden" required>
+                                <i class="fas fa-chalkboard-teacher text-purple-500 text-xl mb-2"></i>
+                                <div class="text-sm font-medium text-gray-700">Faculty</div>
+                            </div>
+                            <div class="role-card border-2 border-gray-200 rounded-lg p-4 text-center"
+                                onclick="selectRole('admin')">
+                                <input type="radio" name="role" value="admin" class="hidden" required>
+                                <i class="fas fa-user-shield text-green-500 text-xl mb-2"></i>
+                                <div class="text-sm font-medium text-gray-700">Admin</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Name Input -->
+                    <div class="form-floating">
+                        <input type="text" id="name" name="name" class="form-input " placeholder=" " value="" required>
+                        <label for="name">Full Name</label>
+                    </div>
+
+                    <!-- Email Input -->
+                    <div class="form-floating">
+                        <input type="email" id="email" name="email" class="form-input " placeholder=" " value=""
+                            required>
+                        <label for="email">University Email</label>
+                    </div>
+
+                    <!-- Student ID Input (for students only) -->
+                    <div class="form-floating student-id-field" style="display: none;">
+                        <input type="text" id="student_id" name="student_id" class="form-input " placeholder=" "
+                            value="" pattern="[0-9]{3}-[0-9]{2}-[0-9]{4}"
+                            title="Student ID format: XXX-XX-XXXX (e.g., 221-15-4750)">
+                        <label for="student_id">Student ID</label>
+                        <div class="text-xs text-gray-500 mt-1">Format: XXX-XX-XXXX (e.g., 221-15-4750)</div>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="form-floating">
+                        <input type="password" id="password" name="password" class="form-input " placeholder=" "
+                            required>
+                        <label for="password">Password</label>
+                    </div>
+
+                    <!-- Confirm Password Input -->
+                    <div class="form-floating">
+                        <input type="password" id="password_confirmation" name="password_confirmation"
+                            class="form-input " placeholder=" " required>
+                        <label for="password_confirmation">Confirm Password</label>
+                    </div>
+
+                    <!-- Student Admission Details -->
+                    <div class="student-fields" style="display: none;">
+                        <!-- Department Selection for Students -->
+                        <div class="form-floating">
+                            <select id="department_id_student" name="department_id" class="form-input ">
+                                <option value="">Select Your Department</option>
+                                <option value="4" data-semester-type="trisemester">
+                                    Business Administration (BBA)
+                                </option>
+                                <option value="7" data-semester-type="trisemester">
+                                    Civil Engineering (CE)
+                                </option>
+                                <option value="1" data-semester-type="trisemester">
+                                    Computer Science &amp; Engineering (CSE)
+                                </option>
+                                <option value="6" data-semester-type="trisemester">
+                                    Electrical &amp; Electronic Engineering (EEE)
+                                </option>
+                                <option value="5" data-semester-type="trisemester">
+                                    English (ENG)
+                                </option>
+                                <option value="3" data-semester-type="trisemester">
+                                    Multimedia &amp; Creative Technology (MCT)
+                                </option>
+                                <option value="9" data-semester-type="trisemester">
+                                    Pharmacy (PHAR)
+                                </option>
+                                <option value="2" data-semester-type="trisemester">
+                                    Software Engineering (SWE)
+                                </option>
+                                <option value="8" data-semester-type="trisemester">
+                                    Textile Engineering (TE)
+                                </option>
+                            </select>
+                            <label for="department_id_student">Department</label>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="form-floating">
+                                <select id="admission_semester" name="admission_semester" class="form-input ">
+                                    <option value="">Select Semester</option>
+                                    <option value="Spring">Spring</option>
+                                    <option value="Summer">Summer</option>
+                                    <option value="Fall">Fall</option>
+                                </select>
+                                <label for="admission_semester">Admission Semester</label>
+                            </div>
+                            <div class="form-floating">
+                                <select id="admission_year" name="admission_year" class="form-input ">
+                                    <option value="">Select Year</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                </select>
+                                <label for="admission_year">Admission Year</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Faculty Department Selection -->
+                    <div class="faculty-fields" style="display: none;">
+                        <div class="form-floating">
+                            <select id="department_id_faculty" name="department_id" class="form-input ">
+                                <option value="">Select Your Department</option>
+                                <option value="4">
+                                    Business Administration (BBA)
+                                </option>
+                                <option value="7">
+                                    Civil Engineering (CE)
+                                </option>
+                                <option value="1">
+                                    Computer Science &amp; Engineering (CSE)
+                                </option>
+                                <option value="6">
+                                    Electrical &amp; Electronic Engineering (EEE)
+                                </option>
+                                <option value="5">
+                                    English (ENG)
+                                </option>
+                                <option value="3">
+                                    Multimedia &amp; Creative Technology (MCT)
+                                </option>
+                                <option value="9">
+                                    Pharmacy (PHAR)
+                                </option>
+                                <option value="2">
+                                    Software Engineering (SWE)
+                                </option>
+                                <option value="8">
+                                    Textile Engineering (TE)
+                                </option>
+                            </select>
+                            <label for="department_id_faculty">Department</label>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="flex items-center">
+                        <input type="checkbox" id="terms" name="terms"
+                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" required>
+                        <label for="terms" class="ml-2 text-sm text-gray-600">
+                            I agree to the <a href="#" class="text-blue-600 hover:text-blue-800">Terms of Service</a>
+                            and <a href="#" class="text-blue-600 hover:text-blue-800">Privacy Policy</a>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors flex items-center justify-center">
+                        <i class="fas fa-user-plus mr-2"></i>
+                        Create Account & Continue to Login
+                    </button>
+                </form>
+
+                <!-- Info Message -->
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">
+                    <div class="flex items-center text-blue-800">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        <span class="text-sm">After creating your account, you'll be redirected to login to access your
+                            dashboard.</span>
+                    </div>
+                </div>
+
+                <!-- Login Link -->
+                <div class="text-center mt-6">
+                    <p class="text-gray-600">
+                        Already have an account?
+                        <a href="http://127.0.0.1:8000/login" class="text-blue-600 hover:text-blue-800 font-medium">Sign
+                            in</a>
+                    </p>
+                </div>
+
+                <!-- Features Preview -->
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <h3 class="text-sm font-medium text-gray-700 mb-3">What you'll get:</h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            Access to faculty reviews and ratings
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            Upload and download academic resources
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            Personal CGPA tracking system
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1E40AF',
-                        secondary: '#F59E0B',
-                        accent: '#10B981',
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 1s ease-in-out',
-                        'slide-up': 'slideUp 0.5s ease-out',
-                    },
-                    keyframes: {
-                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-                        slideUp: { '0%': { transform: 'translateY(20px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
-                    }
-                }
+        function selectRole(role) {
+            console.log('Role selected:', role); // Debug log
+
+            // Remove selected class from all cards
+            document.querySelectorAll('.role-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+
+            // Add selected class to clicked card
+            event.currentTarget.classList.add('selected');
+
+            // Check the radio button
+            event.currentTarget.querySelector('input[type="radio"]').checked = true;
+
+            console.log('Radio button checked:', event.currentTarget.querySelector('input[type="radio"]').checked); // Debug log
+
+            // Show/hide fields based on role
+            const studentFields = document.querySelector('.student-fields');
+            const facultyFields = document.querySelector('.faculty-fields');
+            const studentIdField = document.querySelector('.student-id-field');
+
+            // Hide all role-specific fields first
+            studentFields.style.display = 'none';
+            facultyFields.style.display = 'none';
+            studentIdField.style.display = 'none';
+
+            if (role === 'student') {
+                studentFields.style.display = 'block';
+                studentIdField.style.display = 'block';
+                document.getElementById('admission_semester').required = true;
+                document.getElementById('admission_year').required = true;
+                document.getElementById('student_id').required = true;
+                document.getElementById('department_id_student').required = true;
+                document.getElementById('department_id_student').disabled = false;
+                document.getElementById('department_id_faculty').required = false;
+                document.getElementById('department_id_faculty').disabled = true;
+                document.getElementById('department_id_faculty').value = ''; // Clear faculty department
+            } else if (role === 'faculty') {
+                facultyFields.style.display = 'block';
+                document.getElementById('admission_semester').required = false;
+                document.getElementById('admission_year').required = false;
+                document.getElementById('student_id').required = false;
+                document.getElementById('department_id_student').required = false;
+                document.getElementById('department_id_student').disabled = true;
+                document.getElementById('department_id_student').value = ''; // Clear student department
+                document.getElementById('department_id_faculty').required = true;
+                document.getElementById('department_id_faculty').disabled = false;
+            } else {
+                // Admin role
+                document.getElementById('admission_semester').required = false;
+                document.getElementById('admission_year').required = false;
+                document.getElementById('student_id').required = false;
+                document.getElementById('department_id_student').required = false;
+                document.getElementById('department_id_student').disabled = true;
+                document.getElementById('department_id_student').value = '';
+                document.getElementById('department_id_faculty').required = false;
+                document.getElementById('department_id_faculty').disabled = true;
+                document.getElementById('department_id_faculty').value = '';
             }
         }
+
+        // Handle semester options based on department selection
+        function updateSemesterOptions() {
+            const departmentSelect = document.getElementById('department_id_student');
+            const semesterSelect = document.getElementById('admission_semester');
+
+            if (!departmentSelect || !semesterSelect) return;
+
+            const selectedOption = departmentSelect.options[departmentSelect.selectedIndex];
+            const semesterType = selectedOption ? selectedOption.getAttribute('data-semester-type') : null;
+
+            // Clear current options except the first one
+            semesterSelect.innerHTML = '<option value="">Select Semester</option>';
+
+            if (semesterType === 'trisemester') {
+                semesterSelect.innerHTML += '<option value="Spring">Spring</option>';
+                semesterSelect.innerHTML += '<option value="Summer">Summer</option>';
+                semesterSelect.innerHTML += '<option value="Fall">Fall</option>';
+            } else if (semesterType === 'bisemester') {
+                semesterSelect.innerHTML += '<option value="Spring">Spring</option>';
+                semesterSelect.innerHTML += '<option value="Fall">Fall</option>';
+            }
+
+            // Show info about semester type
+            const infoDiv = document.querySelector('.semester-info');
+            if (infoDiv) infoDiv.remove();
+
+            if (semesterType) {
+                const info = document.createElement('div');
+                info.className = 'semester-info text-xs text-blue-600 mt-1';
+                info.innerHTML = `<i class="fas fa-info-circle mr-1"></i>This department follows ${semesterType === 'trisemester' ? 'tri-semester' : 'bi-semester'} system`;
+                semesterSelect.parentNode.appendChild(info);
+            }
+        }
+
+        // Set initial selection if old value exists
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initially disable both department fields
+            document.getElementById('department_id_student').disabled = true;
+            document.getElementById('department_id_faculty').disabled = true;
+
+            const oldRole = '';
+            if (oldRole) {
+                document.querySelector(`input[value="${oldRole}"]`).checked = true;
+                document.querySelector(`input[value="${oldRole}"]`).closest('.role-card').classList.add('selected');
+                selectRole(oldRole);
+            }
+
+            // Add event listener for department change
+            const departmentSelect = document.getElementById('department_id_student');
+            if (departmentSelect) {
+                departmentSelect.addEventListener('change', updateSemesterOptions);
+                // Update on page load if department is pre-selected
+                updateSemesterOptions();
+            }
+        });
+
+        // Form validation function
+        function validateForm(event) {
+            console.log('Form submission started'); // Debug log
+
+            // Check if role is selected
+            const roleSelected = document.querySelector('input[name="role"]:checked');
+            if (!roleSelected) {
+                alert('Please select your role (Student, Faculty, or Admin)');
+                event.preventDefault();
+                return false;
+            }
+
+            console.log('Role selected:', roleSelected.value); // Debug log
+
+            // Check department selection based on role
+            if (roleSelected.value === 'student') {
+                const studentDept = document.getElementById('department_id_student').value;
+                if (!studentDept) {
+                    alert('Please select your department');
+                    event.preventDefault();
+                    return false;
+                }
+                console.log('Student department selected:', studentDept);
+            } else if (roleSelected.value === 'faculty') {
+                const facultyDept = document.getElementById('department_id_faculty').value;
+                if (!facultyDept) {
+                    alert('Please select your department');
+                    event.preventDefault();
+                    return false;
+                }
+                console.log('Faculty department selected:', facultyDept);
+            }
+
+            // Check terms checkbox
+            const termsChecked = document.querySelector('#terms').checked;
+            if (!termsChecked) {
+                alert('Please accept the Terms of Service and Privacy Policy');
+                event.preventDefault();
+                return false;
+            }
+
+            console.log('Form validation passed, submitting...'); // Debug log
+            return true;
+        }
     </script>
-</head>
 
-<body class="bg-gray-100 dark:bg-gray-900 font-sans flex flex-col min-h-screen transition-colors duration-300">
-    <!-- ...existing code... -->
-
-    <!-- 
-    
-
-     Interactive Register Page -->
-    <section class="flex-grow py-16 bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-700">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-extrabold text-center mb-12 text-primary dark:text-white animate-fade-in">Join
-                UniHub</h2>
-            <div class="max-w-md mx-auto bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg animate-slide-up">
-                <form id="registerForm">
-                    <div class="mb-6">
-                        <label for="name" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Full
-                            Name</label>
-                        <input type="text" id="name"
-                            class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            placeholder="e.g., John Smith" required>
-                    </div>
-                    <div class="mb-6">
-                        <label for="email" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">DIU
-                            Email</label>
-                        <input type="email" id="email"
-                            class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            placeholder="e.g., habiby15-4750@diu.edu.bd" pattern="^[a-zA-Z0-9.-]+@diu\.edu\.bd$"
-                            required>
-                    </div>
-                    <div class="mb-6">
-                        <label for="role" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Role</label>
-                        <select id="role"
-                            class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            required>
-                            <option value="" disabled selected>Select your role</option>
-                            <option value="student">Student</option>
-                            <option value="faculty">Faculty</option>
-                        </select>
-                    </div>
-                    <div class="mb-6">
-                        <label for="password"
-                            class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Password</label>
-                        <input type="password" id="password"
-                            class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            placeholder="Enter your password" required>
-                    </div>
-                    <div class="mb-6">
-                        <label for="confirm-password"
-                            class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Confirm Password</label>
-                        <input type="password" id="confirm-password"
-                            class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                            placeholder="Confirm your password" required>
-                    </div>
-                    <button type="submit"
-                        class="w-full bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition transform hover:scale-105 shadow-lg dark:bg-gray-700 dark:hover:bg-yellow-400">Sign
-                        Up</button>
-                </form>
-                <p class="text-center mt-6 text-gray-600 dark:text-gray-300">Already have an account? <a
-                        href="login.html"
-                        class="text-primary hover:text-secondary font-medium transition dark:text-white dark:hover:text-yellow-400">Log
-                        In</a></p>
-            </div>
-        </div>
-    </section>
+    <script src="js/script.js"></script>
 
     <!-- Footer -->
-    <footer class="bg-primary dark:bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col items-center">
-                <h3 class="text-xl font-bold mb-2 tracking-tight">UniHub</h3>
-                <p class="text-sm mb-4">Empowering your academic journey</p>
-            </div>
-            <div class="mt-6 text-center text-sm">
-                <p>© 2025 UniHub. All rights reserved.</p>
-            </div>
+    <footer class="gradient-bg text-white py-6 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Academic Hub. Made by blackSquad. Enhancing university education through technology.</p>
         </div>
     </footer>
-
-    <script>
-        // Theme toggle functionality
-        const toggleTheme = () => {
-            document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-        };
-        
-        // Apply saved theme on page load
-        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
-
-        // Add event listeners for theme toggle buttons (if they exist)
-        const themeToggle = document.getElementById('theme-toggle');
-        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
-        if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
-        if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
-
-        // Handle registration form submission
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const role = document.getElementById('role').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-            // Basic validation
-            if (!name || !email || !role || !password || !confirmPassword) {
-                alert('Please fill in all fields');
-                return;
-            }
-            if (!/^[a-zA-Z0-9.-]+@diu\.edu\.bd$/.test(email)) {
-                alert('Please use a valid DIU email address (e.g., habiby15-4750@diu.edu.bd)');
-                return;
-            }
-            if (password !== confirmPassword) {
-                alert('Passwords do not match');
-                return;
-            }
-            if (password.length < 6) {
-                alert('Password must be at least 6 characters long');
-                return;
-            }
-            // Store user data (simple simulation)
-            const userData = {
-                name: name,
-                email: email,
-                role: role,
-                password: password,
-                registeredAt: new Date().toISOString()
-            };
-            localStorage.setItem('registeredUser', JSON.stringify(userData));
-            console.log('Registration successful! Redirecting to login page...');
-            try {
-                window.location.href = 'login.html';
-            } catch (err) {
-                console.error('Redirect error:', err);
-                document.body.innerHTML += '<div style="text-align:center;margin:2em;"><a href="login.html" style="font-size:1.5em;color:#1E40AF;">Go to Login Page</a></div>';
-            }
-            // Fallback: show manual link if redirect fails after 2 seconds
-            setTimeout(function() {
-                if (window.location.pathname.indexOf('login.html') === -1) {
-                    document.body.innerHTML += '<div style="text-align:center;margin:2em;"><a href="login.html" style="font-size:1.5em;color:#1E40AF;">Go to Login Page</a></div>';
-                }
-            }, 2000);
-        });
-    </script>
 </body>
 
 </html>
