@@ -108,7 +108,7 @@
                 <a href="user-profile.html" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">Profile Settings</a>
                 <button id="mobile-theme-toggle" class="block px-4 py-2 w-full text-left hover:bg-secondary hover:text-white transition duration-300">
                     <span class="dark:hidden">🌙 Dark Mode</span>
-                    <span class="hidden dark:block">☀ Light Mode</span>
+                    <span class="hidden dark:block">☀️ Light Mode</span>
                 </button>
                 <a href="#" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">🔔 Notifications</a>
                 <a href="#" class="block px-4 py-2 hover:bg-secondary hover:text-white transition duration-300">🔒 Privacy</a>
@@ -270,16 +270,25 @@
             { id: 'PHY101', name: 'Physics I', folderId: 'FOLDER_ID_PHY101' }
         ];
 
+        // Resources Storage
+        let resources = JSON.parse(localStorage.getItem('resources')) || [];
+
+        // Profanity Filter
+        const profanityList = ['badword1', 'badword2'];
+        function isAppropriate(text) {
+            return !profanityList.some(word => text.toLowerCase().includes(word)) && text.length >= 5;
+        }
+
         // Initialize Google API
         function initGoogleDrive() {
             if (typeof gapi !== 'undefined') {
-                gapi.load('client:auth2', function() {
+                gapi.load('client:auth2', () => {
                     gapi.client.init({
                         apiKey: API_KEY,
                         clientId: CLIENT_ID,
                         discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
                         scope: SCOPES
-                    }).then(function() {
+                    }).then(() => {
                         if (typeof google !== 'undefined' && google.accounts) {
                             tokenClient = google.accounts.oauth2.initTokenClient({
                                 client_id: CLIENT_ID,
@@ -475,14 +484,13 @@
                 const course = courses.find(c => c.id === resource.courseId);
                 const resourceDiv = document.createElement('div');
                 resourceDiv.className = 'p-4 bg-gray-50 dark:bg-gray-700 rounded-lg';
-            resourceDiv.innerHTML =
-                `<p class="text-gray-700 dark:text-gray-300"><strong>Title:</strong> ${resource.title}</p>` +
-                `<p class="text-gray-700 dark:text-gray-300"><strong>Course:</strong> ${course.name}</p>` +
-                `<p class="text-gray-700 dark:text-gray-300"><strong>Tags:</strong> ${resource.tags.join(', ')}</p>` +
-                `<p class="text-gray-600 dark:text-gray-400 text-sm">By ${resource.studentId} (Batch ${resource.batch})</p>` +
-                (resource.type === 'file'
-                    ? `<a href="${resource.link}" target="_blank" class="text-accent hover:underline">Download/View</a>`
-                    : `<a href="${resource.link}" target="_blank" class="text-accent hover:underline">Visit Link</a>`);
+                resourceDiv.innerHTML = `
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Title:</strong> ${resource.title}</p>
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Course:</strong> ${course.name}</p>
+                    <p class="text-gray-700 dark:text-gray-300"><strong>Tags:</strong> ${resource.tags.join(', ')}</p>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">By ${resource.studentId} (Batch ${resource.batch})</p>
+                    ${resource.type === 'file' ? `<a href="${resource.link}" target="_blank" class="text-accent hover:underline">Download/View</a>` : `<a href="${resource.link}" target="_blank" class="text-accent hover:underline">Visit Link</a>`}
+                `;
                 resourcesDiv.appendChild(resourceDiv);
             });
         }
@@ -507,10 +515,10 @@
         async function deleteFileFromDrive(fileId) {
             if (!accessToken || !fileId) return;
             try {
-            await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}`, {
-                method: 'DELETE',
-                headers: { Authorization: `Bearer ${accessToken}` }
-            });
+                await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}`, {
+                    method: 'DELETE',
+                    headers: { Authorization: `Bearer ${accessToken}` }
+                });
             } catch (error) {
                 console.error('Failed to delete file from Google Drive:', error);
             }
@@ -535,7 +543,7 @@
                     <p class="text-gray-700 dark:text-gray-300"><strong>Tags:</strong> ${resource.tags.join(', ')}</p>
                     <p class="text-gray-700 dark:text-gray-300"><strong>Status:</strong> ${resource.approved ? 'Approved' : 'Pending'}</p>
                     <p class="text-gray-600 dark:text-gray-400 text-sm">By ${resource.studentId} (Batch ${resource.batch})</p>
-                    ${resource.type === 'file' ? <a href="${resource.link}" target="_blank" class="text-accent hover:underline">Download/View</a> : <a href="${resource.link}" target="_blank" class="text-accent hover:underline">Visit Link</a>}
+                    ${resource.type === 'file' ? `<a href="${resource.link}" target="_blank" class="text-accent hover:underline">Download/View</a>` : `<a href="${resource.link}" target="_blank" class="text-accent hover:underline">Visit Link</a>`}
                     <div class="flex space-x-2">
                         <button class="approve-resource bg-accent text-white px-3 py-1 rounded-lg hover:bg-green-700 transition" data-id="${resource.id}">Approve</button>
                         <button class="delete-resource bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition" data-id="${resource.id}">Delete</button>
