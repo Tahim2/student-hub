@@ -1,0 +1,2065 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Courses - Academic Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style/styles.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="gradient-bg shadow-lg fixed w-full top-0 z-40">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <button onclick="toggleSidebar()" class="lg:hidden text-white/80 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/20">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                    <a href="#" class="navbar-brand lg:bg-white/20 flex items-center space-x-2">
+                        <i class="fas fa-graduation-cap text-xl"></i>
+                        <span>Academic Hub</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="http://127.0.0.1:8000/profile" class="flex items-center space-x-3 text-white/90 hover:text-white transition-colors group">
+                                                    <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border-2 border-white/20 group-hover:border-white/40 transition-colors">
+                                <i class="fas fa-user text-sm"></i>
+                            </div>
+                                                <span class="text-sm font-medium group-hover:underline">Shaikh Ahmed Fayaz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Overlay for Mobile -->
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar sidebar-bg">
+        <div class="sidebar-header">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-blue-100 p-2 rounded-lg">
+                        <i class="fas fa-user text-blue-600 text-lg"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-800">Shaikh Ahmed Fayaz</p>
+                        <p class="text-xs text-gray-600">Student</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="toggleSidebarSize()" class="hidden lg:flex items-center justify-center w-8 h-8 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors border border-gray-300">
+                        <i class="fas fa-chevron-left text-sm" id="toggleIcon"></i>
+                    </button>
+                    <button onclick="toggleSidebar()" class="lg:hidden text-gray-600 hover:text-gray-800 p-2 rounded-lg hover:bg-gray-100">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-6">
+            <div class="space-y-2">
+                <a href="http://127.0.0.1:8000/dashboard" class="sidebar-item flex items-center space-x-3 px-4 py-3">
+                    <i class="fas fa-home text-lg"></i>
+                    <span class="sidebar-text">Dashboard</span>
+                </a>
+                
+                                    <a href="http://127.0.0.1:8000/my-courses" class="sidebar-item active flex items-center space-x-3 px-4 py-3">
+                        <i class="fas fa-book text-lg"></i>
+                        <span class="sidebar-text">My Courses</span>
+                    </a>
+                    <a href="http://127.0.0.1:8000/grades" class="sidebar-item flex items-center space-x-3 px-4 py-3">
+                        <i class="fas fa-chart-line text-lg"></i>
+                        <span class="sidebar-text">CGPA Tracker</span>
+                    </a>
+                    <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3">
+                        <i class="fas fa-star text-lg"></i>
+                        <span class="sidebar-text">Rate Faculty</span>
+                    </a>
+                    <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3">
+                        <i class="fas fa-download text-lg"></i>
+                        <span class="sidebar-text">Resources</span>
+                    </a>
+                                
+                <div class="border-t border-gray-200 pt-4 mt-4">
+                    <a href="http://127.0.0.1:8000/profile" class="sidebar-item flex items-center space-x-3 px-4 py-3">
+                        <i class="fas fa-user text-lg"></i>
+                        <span class="sidebar-text">Profile</span>
+                    </a>
+                    <a href="#" class="sidebar-item flex items-center justify-between px-4 py-3" onclick="toggleNightMode()">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-moon text-lg"></i>
+                            <span class="sidebar-text">Dark Mode</span>
+                        </div>
+                        <div class="toggle-switch" id="nightModeToggle">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </a>
+                    <a href="http://127.0.0.1:8000/settings" class="sidebar-item flex items-center space-x-3 px-4 py-3">
+                        <i class="fas fa-cog text-lg"></i>
+                        <span class="sidebar-text">Settings</span>
+                    </a>
+                    <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3">
+                        <i class="fas fa-question-circle text-lg"></i>
+                        <span class="sidebar-text">Help & Support</span>
+                    </a>
+                    <form method="POST" action="http://127.0.0.1:8000/logout">
+                        <input type="hidden" name="_token" value="qXPXzKpLxw4J13ppphPVJeWBSdhjzwDaMHkez12j" autocomplete="off">                        <button type="submit" class="sidebar-item flex items-center space-x-3 px-4 py-3 w-full text-left text-red-600 hover:bg-red-50 transition-colors">
+                            <i class="fas fa-sign-out-alt text-lg"></i>
+                            <span class="sidebar-text">Logout</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="container mx-auto px-4 lg:px-6 py-8">
+            <!-- Header -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-4">My Courses</h1>
+                <p class="text-gray-600">Track your academic progress and enrolled courses</p>
+            </div>
+
+            <!-- Academic Info Card -->
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl shadow-lg p-6 mb-8 text-white">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="text-center md:text-left">
+                        <h3 class="text-lg font-semibold mb-1">Current Level</h3>
+                        <p class="text-2xl font-bold">Level 4</p>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h3 class="text-lg font-semibold mb-1">Current Term</h3>
+                        <p class="text-2xl font-bold">Term 2</p>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h3 class="text-lg font-semibold mb-1">Admission</h3>
+                        <p class="text-lg">Spring 2022</p>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h3 class="text-lg font-semibold mb-1">Department</h3>
+                        <p class="text-sm">Computer Science &amp; Engineering</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- CGPA -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="flex items-center">
+                        <div class="bg-blue-100 p-3 rounded-lg">
+                            <i class="fas fa-chart-line text-blue-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-600">CGPA</p>
+                            <p class="text-2xl font-bold text-gray-900">0.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Courses Available -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="flex items-center">
+                        <div class="bg-green-100 p-3 rounded-lg">
+                            <i class="fas fa-book text-green-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-600">Available Courses</p>
+                            <p class="text-2xl font-bold text-gray-900">54</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Completed Semesters -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="flex items-center">
+                        <div class="bg-purple-100 p-3 rounded-lg">
+                            <i class="fas fa-calendar-check text-purple-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-600">Semesters</p>
+                            <p class="text-2xl font-bold text-gray-900">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Courses by Semester -->
+                                            <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">
+                            Level 1 - Term 1
+                                                    </h2>
+                                            </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Computer Fundamentals</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-112</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Introduction to computer systems, hardware, software, and basic computing concepts.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/4" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Introduction to Biology and Chemistry for Computation</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-115</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Basic biological and chemical concepts relevant to computational applications and bioinformatics.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/3" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">GED Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Basic Functional English and English Spoken</h3>
+                                <p class="text-sm text-gray-600 mb-2">ENG-101</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Fundamental English language skills focusing on functional communication and spoken English proficiency.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/1" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">GED Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Mathematics - I</h3>
+                                <p class="text-sm text-gray-600 mb-2">MAT-101</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Foundation mathematics covering algebra, trigonometry, and basic calculus concepts.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/2" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+                                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">
+                            Level 1 - Term 2
+                                                    </h2>
+                                            </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Programming and Problem Solving</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-113</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Introduction to programming concepts, algorithmic thinking, and problem-solving techniques using C programming.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/7" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Lab</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Programming and Problem Solving Lab</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-114</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>1.5 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Practical programming exercises and lab work complementing CSE-113.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/8" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">GED Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Writing and Comprehension</h3>
+                                <p class="text-sm text-gray-600 mb-2">ENG-102</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Advanced English writing skills, reading comprehension, and communication techniques.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/5" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">GED Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Mathematics-II: Calculus, Complex Variables and Linear Algebra</h3>
+                                <p class="text-sm text-gray-600 mb-2">MAT-102</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Advanced mathematics covering differential calculus, complex numbers, matrices, and linear algebra.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/6" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">GED Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Physics-I</h3>
+                                <p class="text-sm text-gray-600 mb-2">PHY-101</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Fundamental physics covering mechanics, waves, thermodynamics, and basic physics principles.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/9" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+                                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">
+                            Level 1 - Term 3
+                                                    </h2>
+                                            </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Electrical Circuits</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-121</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Basic electrical circuit theory, analysis techniques, and circuit components.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/12" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Lab</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Electrical Circuits Lab</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-122</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>1.5 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Practical circuit building and analysis laboratory work.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/13" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Data Structure</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-123</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Fundamental data structures including arrays, linked lists, stacks, queues, trees, and graphs.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/14" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Lab</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Data Structure Lab</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-124</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>1.5 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Implementation and practical exercises for data structures concepts.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/15" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">GED Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Physics - II</h3>
+                                <p class="text-sm text-gray-600 mb-2">PHY-102</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Advanced physics covering electricity, magnetism, optics, and modern physics concepts.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/10" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">GED Lab</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Physics - II Lab</h3>
+                                <p class="text-sm text-gray-600 mb-2">PHY-103</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>1.5 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Laboratory experiments and practical work for Physics-II course.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/11" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+                                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">
+                            Level 2 - Term 1
+                                                    </h2>
+                                            </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">GED Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Bangladesh Studies (History of Independence and Contemporary Issues)</h3>
+                                <p class="text-sm text-gray-600 mb-2">BNS-101</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">History of Bangladesh independence movement and contemporary social and political issues.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/20" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Discrete Mathematics</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-212</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Mathematical foundations for computer science including logic, sets, combinatorics, and graph theory.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/17" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Algorithms</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-213</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Design and analysis of algorithms, complexity theory, and algorithmic problem solving.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/18" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Lab</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Algorithms Lab</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-214</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>1.5 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Implementation and analysis of various algorithms and their performance.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/19" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">GED Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Engineering Mathematics</h3>
+                                <p class="text-sm text-gray-600 mb-2">MAT-211</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Advanced mathematical concepts for engineering including differential equations, Fourier series, and transforms.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/16" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+                                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">
+                            Level 2 - Term 2
+                                                    </h2>
+                                            </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">GED Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Art of Living</h3>
+                                <p class="text-sm text-gray-600 mb-2">AOL-101</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Philosophy of life, ethics, moral values, and personal development.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/21" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Electronic Devices and Circuits</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-215</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Semiconductor devices, transistors, amplifiers, and electronic circuit design.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/22" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Lab</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Electronic Devices and Circuits Lab</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-216</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>1.5 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Practical work with electronic devices and circuit construction.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/23" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Object Oriented Programming</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-221</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Object-oriented programming concepts using Java including classes, inheritance, and polymorphism.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/24" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Lab</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Object Oriented Programming Lab</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-222</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>1.5 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Practical implementation of object-oriented programming concepts.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/25" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+                                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">
+                            Level 2 - Term 3
+                                                    </h2>
+                                            </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Digital Logic Design</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-223</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Boolean algebra, logic gates, combinational and sequential circuit design.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/26" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Lab</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Digital Logic Design Lab</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-224</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>1.5 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Hands-on experience with digital circuits and logic gate implementations.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/27" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Data Communication</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-225</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Data transmission techniques, communication protocols, and network fundamentals.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/28" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Systems Analysis and Design</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-227</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">System development lifecycle, requirements analysis, and software design methodologies.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/30" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Theory of Computation</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-228</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Formal languages, automata theory, computability, and complexity theory.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/29" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+                                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">
+                            Level 3 - Term 1
+                                                    </h2>
+                                            </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Numerical Methods</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-226</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Numerical techniques for solving mathematical problems in computing and engineering.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/31" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Database Management System</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-311</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Database design principles, SQL, normalization, and database administration.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/32" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Lab</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Database Management System Lab</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-312</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>1.5 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Practical database implementation and management using DBMS tools.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/33" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Compiler Design</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-313</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Lexical analysis, parsing, code generation, and optimization techniques in compiler construction.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/34" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Lab</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Compiler Design Lab</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-314</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>1.5 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Implementation of compiler components and language processing tools.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/35" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+                                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">
+                            Level 3 - Term 2
+                                                    </h2>
+                                            </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">GED Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Financial and Managerial Accounting</h3>
+                                <p class="text-sm text-gray-600 mb-2">ACT-327</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Basic accounting principles, financial statements, and managerial decision making.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/40" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Software Engineering</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-315</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Software development lifecycle, project management, quality assurance, and testing methodologies.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/36" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Microprocessor and Microcontrollers</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-317</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Architecture, programming, and interfacing of microprocessors and microcontroller systems.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/37" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Computer Networks</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-321</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Network protocols, OSI model, TCP/IP, routing, and network security fundamentals.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/38" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Lab</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Computer Networks Lab</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-322</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>1.5 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Network configuration, protocol implementation, and network troubleshooting.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/39" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+                                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">
+                            Level 3 - Term 3
+                                                    </h2>
+                                            </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Artificial Intelligence</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-316</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">AI fundamentals, search algorithms, machine learning basics, and intelligent systems.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/42" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Operating Systems</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-323</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">OS concepts, process management, memory management, file systems, and system calls.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/43" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Lab</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Operating Systems Lab</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-324</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>1.5 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">System programming, shell scripting, and OS implementation exercises.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/44" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Elective-I</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-391</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">First elective course chosen from approved CSE elective courses list.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/45" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">GED Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Statistics and Probability</h3>
+                                <p class="text-sm text-gray-600 mb-2">STA-101</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Statistical methods, probability theory, and data analysis techniques.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/41" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+                                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">
+                            Level 4 - Term 1
+                                                    </h2>
+                                            </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Instrumentation and Control</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-325</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Control systems, sensors, actuators, and instrumentation for computer systems.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/46" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Social and Professional Issues in Computing</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-326</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Ethics in computing, professional responsibilities, social impact of technology.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/47" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Computer Graphics</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-411</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Graphics algorithms, 2D/3D transformations, rendering techniques, and graphics programming.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/48" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Lab</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Computer Graphics Lab</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-412</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>1.5 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Practical implementation of graphics algorithms and graphics programming projects.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/49" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Elective-II</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-492</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Second elective course chosen from approved CSE elective courses list.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/50" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+                                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900">
+                            Level 4 - Term 2 (Current)
+                                                            <span class="ml-2 px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">Current</span>
+                                                    </h2>
+                                            </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Computer Architecture and Organization</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-413</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Computer system architecture, CPU design, memory hierarchy, and performance analysis.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/51" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Elective-III</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-493</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Third elective course - Specialized Major course option.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/52" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Core Theory</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Elective-IV</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-494</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">Fourth elective course - Specialized Major course option.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/53" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                                <div class="bg-white rounded-xl shadow-lg overflow-hidden card-hover">
+                            <div class="p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-blue-100 p-2 rounded-lg">
+                                        <i class="fas fa-book text-blue-600"></i>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Core</span>
+                                                                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Project</span>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Capstone Project (Phase I)</h3>
+                                <p class="text-sm text-gray-600 mb-2">CSE-498</p>
+                                
+                                <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+                                    <span><i class="fas fa-credit-card mr-1"></i>3.0 Credits</span>
+                                    <span><i class="fas fa-building mr-1"></i>CSE</span>
+                                </div>
+                                
+                                                                <p class="text-sm text-gray-500 mb-4 line-clamp-3">First phase of capstone project - project planning, literature review, and initial development.</p>
+                                                                
+                                <!-- Enrollment Status -->
+                                                                
+                                                                
+                                <div class="mt-4 flex space-x-2">
+                                    <a href="http://127.0.0.1:8000/courses/54" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm py-2 px-4 rounded-lg transition-colors text-center inline-block">
+                                        View Details
+                                    </a>
+                                                                    </div>
+                            </div>
+                        </div>
+                                            </div>
+                </div>
+                                    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 footer-margin" id="footer">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-600">&copy; 2024 Academic Hub. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
