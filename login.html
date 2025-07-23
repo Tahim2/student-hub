@@ -1,272 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark:bg-gray-900">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Academic Hub</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            background-color: #007bff;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .navbar {
-            background-color: #007bff;
-            padding: 0.5rem 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-            color: white;
-            font-size: 1.1rem;
-        }
-        .navbar-brand .icon {
-            font-size: 1.5rem;
-            margin-right: 0.5rem;
-        }
-        .login-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px 0;
-        }
-        .row.justify-content-center.w-100 {
-            gap: 0;
-            margin-right: 0;
-            margin-left: 0;
-        }
-        @media (min-width: 992px) {
-            .login-container .row.justify-content-center.w-100 > [class^="col-"]:first-child {
-                margin-right: 10px;
-            }
-            .login-container .row.justify-content-center.w-100 > [class^="col-"]:last-child {
-                margin-left: 0px;
-            }
-        }
-        .login-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem 1.5rem;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        .login-card h2 {
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-        .login-card .icon {
-            font-size: 1.5rem;
-            color: #007bff;
-            margin-bottom: 1rem;
-        }
-        .login-card .form-control {
-            border-radius: 5px;
-            border: 1px solid #ced4da;
-        }
-        .login-card .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-            border-radius: 5px;
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-        .login-card .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-        }
-        .login-card .btn-primary .fas {
-            margin-right: 0.5rem;
-        }
-        .login-card .form-check-label a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .login-card .form-check-label a:hover {
-            text-decoration: underline;
-        }
-        .underline {
-            border-bottom: 2px solid #007bff;
-            margin: 1.5rem 0;
-            width: 100%;
-        }
-        .feature-section {
-            color: white;
-            padding-left: 1.2rem;
-            padding-right: 1.2rem;
-            padding-top: 20px;
-            max-width: 400px;
-        }
-        .feature-section h4 {
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-        }
-        /* Animation for Access World section */
-        .feature-section {
-            opacity: 0;
-            transform: translateY(40px);
-            animation: fadeSlideIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-        @keyframes fadeSlideIn {
-            0% {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .feature-section p {
-            margin-bottom: 1rem;
-        }
-        .feature-section .list-group-item {
-            background: none;
-            border: none;
-            color: white;
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        .feature-section .list-group-item .icon {
-            font-size: 1.2rem;
-            margin-right: 0.5rem;
-            width: 32px;
-            height: 32px;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 16px 0 rgba(0,0,0,0.18), 0 1.5px 4px 0 rgba(0,0,0,0.12);
-        }
-        .feature-section .sub-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
-            padding: 1rem;
-            margin-top: 1rem;
-        }
-        .feature-section .sub-section h5 {
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-        }
-        .feature-section .sub-section .icon {
-            font-size: 1rem;
-            margin-right: 0.5rem;
-        }
-        .footer {
-            color: white;
-            text-align: center;
-            padding: 1rem 0;
-            font-size: 0.9rem;
-        }
-        @media (max-width: 992px) {
-            .login-container {
-                padding: 10px 0;
-            }
-            .login-card, .feature-section {
-                padding: 1rem;
-                max-width: 100%;
-            }
-            .feature-section {
-                padding-left: 0;
-                padding-right: 0;
-                text-align: center;
-                margin-top: 2rem;
-            }
-            .login-card {
-                margin-bottom: 2rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <span class="icon"><i class="fas fa-graduation-cap"></i></span> Academic Hub
-            </a>
-        </div>
-    </nav>
-    <div class="login-container">
-        <div class="row justify-content-center w-100">
-            <div class="col-12 col-md-6">
-                <div class="login-card">
-                    <div class="icon"><i class="fas fa-arrow-right"></i></div>
-                    <h2>Welcome Back</h2>
-                    <p>Sign in to your Academic Hub account</p>
-                    <form>
-                        <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Email Address" required>
-                        </div>
-                        <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Password" required>
-                        </div>
-                        <div class="row mb-3 align-items-center">
-                            <div class="col-6 text-start">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="rememberMe">
-                                    <label class="form-check-label" for="rememberMe">Remember me</label>
-                                </div>
-                            </div>
-                            <div class="col-6 text-end">
-                                <a href="#" class="small">Forgot password?</a>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Sign In</button>
-                        <p class="mt-3">Don't have an account? <a href="register.html">Register here</a></p>
-                        <div class="underline"></div>
-                        <p>Quick Access:</p>
-                        <p><a href="#">Demo Student</a> | <a href="#">Demo Faculty</a></p>
-                    </form>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 feature-section">
-                <h4>Access Your Academic World</h4>
-                <p>Sign in to explore faculty reviews, access academic resources, and track your CGPA progress.</p>
-                <ul class="list-group">
-                    <li class="list-group-item"><span class="icon text-warning">★</span> Faculty Reviews - Read and write reviews for faculty members across different courses</li>
-                    <li class="list-group-item"><span class="icon text-info">🌐</span> Resource Library - Access notes, past papers, and study materials from Google Drive</li>
-                    <li class="list-group-item"><span class="icon text-success">📊</span> CGPA Tracker - Monitor your academic progress with automated CGPA calculations</li>
-                    <li class="list-group-item"><span class="icon text-danger">👥</span> Student Community - Connect with fellow students and share academic experiences</li>
-                </ul>
-                <div class="sub-section">
-                    <h5><span class="icon text-primary">🎓</span> For Students</h5>
-                    <p>Review faculty, access resources, track grades</p>
-                    <h5><span class="icon text-success">👩‍🏫</span> For Faculty</h5>
-                    <p>View reviews, verify profiles, engage with students</p>
-                    <h5><span class="icon text-warning">🛡️</span> For Admins</h5>
-                    <p>Manage platform, moderate content, oversee system</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="footer">
-        <p>Academic Hub<br>Empowering your academic journey<br>© 2025 Academic Hub. Made by blackSquad. All rights reserved.</p>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // Robust event listener for all forms
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Login functionality would be implemented here.');
-            });
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E40AF',
+                        secondary: '#F59E0B',
+                        accent: '#10B981',
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: { '0%': { transform: 'translateY(20px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 font-sans flex flex-col min-h-screen transition-colors duration-300">
+    <!-- ...existing code... -->
+
+    <!-- 
+ Interactive Login Page -->
+    <section class="flex-grow py-16 bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-700">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-extrabold text-center mb-12 text-primary dark:text-white animate-fade-in">Log In to UniHub</h2>
+            <div class="max-w-md mx-auto bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg animate-slide-up">
+                <form id="loginForm">
+                    <div class="mb-6">
+                        <label for="email" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">DIU Email</label>
+                        <input type="email" id="email" class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="e.g., john.smith@diu.edu.bd" pattern="[a-zA-Z0-9._%+-]+@diu\.edu\.bd$" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="password" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Password</label>
+                        <input type="password" id="password" class="w-full p-3 border-2 border-primary rounded-lg focus:outline-none focus:border-secondary transition dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition transform hover:scale-105 shadow-lg dark:bg-gray-700 dark:hover:bg-yellow-400">Log In</button>
+                </form>
+                <p class="text-center mt-6 text-gray-600 dark:text-gray-300">Don't have an account? <a href="register.html" class="text-primary hover:text-secondary font-medium transition dark:text-white dark:hover:text-yellow-400">Sign Up</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary dark:bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center">
+                <h3 class="text-xl font-bold mb-2 tracking-tight">UniHub</h3>
+                <p class="text-sm mb-4">Empowering your academic journey</p>
+            </div>
+            <div class="mt-6 text-center text-sm">
+                <p>© 2025 UniHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const toggleTheme = () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        };
+        
+        // Apply saved theme on page load
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+        
+        // Add event listeners for theme toggle buttons (if they exist)
+        const themeToggle = document.getElementById('theme-toggle');
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+        if (mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+        
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            // Basic validation
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            if (!/^[a-zA-Z0-9.-]+@diu\.edu\.bd$/.test(email)) {
+                alert('Please use a valid DIU email address (e.g., habiby15-4750@diu.edu.bd)');
+                return;
+            }
+            // Get registered user data from localStorage
+            const registeredUser = JSON.parse(localStorage.getItem('registeredUser'));
+            if (!registeredUser || registeredUser.email !== email) {
+                alert('No account found with this email. Please register first.');
+                return;
+            }
+            // Check password
+            if (registeredUser.password && registeredUser.password === password) {
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('isLoggedIn', 'true');
+                console.log('User logged in:', email);
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
         });
     </script>
 </body>
+
+</html>
+
 </html>

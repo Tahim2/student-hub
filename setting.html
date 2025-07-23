@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Academic Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style/styles.css">
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="gradient-bg shadow-lg fixed w-full top-0 z-40">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <button onclick="toggleSidebar()"
+                        class="lg:hidden text-white/80 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/20">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                    <a href="http://127.0.0.1:8000/dashboard"
+                        class="navbar-brand lg:bg-white/20 flex items-center space-x-2">
+                        <i class="fas fa-graduation-cap text-xl"></i>
+                        <span>Academic Hub</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="http://127.0.0.1:8000/profile"
+                        class="flex items-center space-x-3 text-white/90 hover:text-white transition-colors group">
+                        <div
+                            class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center border-2 border-white/20 group-hover:border-white/40 transition-colors">
+                            <i class="fas fa-user text-sm"></i>
+                        </div>
+                        <span class="text-sm font-medium group-hover:underline">Shaikh Ahmed Fayaz</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Overlay for Mobile -->
+    <div id="sidebar-overlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar sidebar-bg">
+        <div class="sidebar-header">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-blue-100 p-2 rounded-lg">
+                        <i class="fas fa-graduation-cap text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold text-gray-800">Academic Hub</h2>
+                        <p class="text-sm text-gray-600">Student Panel</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="toggleSidebarSize()"
+                        class="hidden lg:block text-gray-600 hover:text-gray-800 p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-chevron-left" id="toggleIcon"></i>
+                    </button>
+                    <button onclick="toggleSidebar()"
+                        class="lg:hidden text-gray-600 hover:text-gray-800 p-2 rounded-lg hover:bg-gray-100">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-6">
+            <div class="space-y-2">
+                <a href="http://127.0.0.1:8000/dashboard" class="sidebar-item flex items-center space-x-3 px-4 py-3">
+                    <i class="fas fa-home text-lg"></i>
+                    <span class="sidebar-text">Dashboard</span>
+                </a>
+
+                <a href="http://127.0.0.1:8000/my-courses" class="sidebar-item flex items-center space-x-3 px-4 py-3">
+                    <i class="fas fa-book text-lg"></i>
+                    <span class="sidebar-text">My Courses</span>
+                </a>
+                <a href="http://127.0.0.1:8000/grades" class="sidebar-item flex items-center space-x-3 px-4 py-3">
+                    <i class="fas fa-chart-line text-lg"></i>
+                    <span class="sidebar-text">CGPA Tracker</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3">
+                    <i class="fas fa-star text-lg"></i>
+                    <span class="sidebar-text">Rate Faculty</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3">
+                    <i class="fas fa-download text-lg"></i>
+                    <span class="sidebar-text">Resources</span>
+                </a>
+
+                <div class="border-t border-gray-200 pt-4 mt-4">
+                    <a href="http://127.0.0.1:8000/profile" class="sidebar-item flex items-center space-x-3 px-4 py-3">
+                        <i class="fas fa-user text-lg"></i>
+                        <span class="sidebar-text">Profile</span>
+                    </a>
+                    <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3" onclick="toggleNightMode()">
+                        <i class="fas fa-moon text-lg"></i>
+                        <span class="sidebar-text">Dark Mode</span>
+                        <div class="toggle-switch ml-auto" id="nightModeToggle">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </a>
+                    <a href="http://127.0.0.1:8000/settings"
+                        class="sidebar-item active flex items-center space-x-3 px-4 py-3">
+                        <i class="fas fa-cog text-lg"></i>
+                        <span class="sidebar-text">Settings</span>
+                    </a>
+                    <a href="#" class="sidebar-item flex items-center space-x-3 px-4 py-3">
+                        <i class="fas fa-question-circle text-lg"></i>
+                        <span class="sidebar-text">Help & Support</span>
+                    </a>
+                    <form method="POST" action="http://127.0.0.1:8000/logout" class="sidebar-item">
+                        <input type="hidden" name="_token" value="qXPXzKpLxw4J13ppphPVJeWBSdhjzwDaMHkez12j"
+                            autocomplete="off"> <button type="submit"
+                            class="w-full flex items-center space-x-3 px-4 py-3 text-left hover:bg-red-50 hover:text-red-600 transition-colors">
+                            <i class="fas fa-sign-out-alt text-lg"></i>
+                            <span class="sidebar-text">Logout</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="container mx-auto px-4 lg:px-6 py-8">
+            <!-- Settings Header -->
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Settings</h1>
+                <p class="text-gray-600">Manage your account preferences and settings</p>
+            </div>
+
+            <!-- Settings Cards -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+                <!-- Preferences Settings -->
+                <div class="settings-card bg-white rounded-2xl shadow-lg p-6 lg:p-8">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="bg-purple-100 p-3 rounded-full">
+                            <i class="fas fa-palette text-purple-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900">Preferences</h2>
+                            <p class="text-gray-600">Customize your experience</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Notifications -->
+                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-bell text-gray-600"></i>
+                                <div>
+                                    <p class="font-medium text-gray-900">Notifications</p>
+                                    <p class="text-sm text-gray-600">Receive email notifications</p>
+                                </div>
+                            </div>
+                            <div class="toggle-switch active" id="notificationToggle">
+                                <div class="toggle-slider"></div>
+                            </div>
+                        </div>
+
+                        <!-- Language -->
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <i class="fas fa-language text-gray-600"></i>
+                                <div>
+                                    <p class="font-medium text-gray-900">Language</p>
+                                    <p class="text-sm text-gray-600">Choose your preferred language</p>
+                                </div>
+                            </div>
+                            <select
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="en">English</option>
+                                <option value="bn">বাংলা</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="settings-card bg-white rounded-2xl shadow-lg p-6 lg:p-8">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="bg-green-100 p-3 rounded-full">
+                            <i class="fas fa-shield-alt text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900">Security</h2>
+                            <p class="text-gray-600">Manage your account security</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <button class="w-full p-4 text-left bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-key text-gray-600"></i>
+                                <div>
+                                    <p class="font-medium text-gray-900">Change Password</p>
+                                    <p class="text-sm text-gray-600">Update your login password</p>
+                                </div>
+                            </div>
+                        </button>
+
+                        <button class="w-full p-4 text-left bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-mobile-alt text-gray-600"></i>
+                                <div>
+                                    <p class="font-medium text-gray-900">Two-Factor Authentication</p>
+                                    <p class="text-sm text-gray-600">Add an extra layer of security</p>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Account Actions -->
+                <div class="settings-card bg-white rounded-2xl shadow-lg p-6 lg:p-8">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="bg-red-100 p-3 rounded-full">
+                            <i class="fas fa-cog text-red-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900">Account Actions</h2>
+                            <p class="text-gray-600">Manage your account</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <button class="w-full p-4 text-left bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-download text-gray-600"></i>
+                                <div>
+                                    <p class="font-medium text-gray-900">Export Data</p>
+                                    <p class="text-sm text-gray-600">Download your account data</p>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-16 footer-margin" id="footer">
+        <div class="container mx-auto px-4 lg:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- About Section -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-graduation-cap text-blue-400 text-2xl"></i>
+                        <h3 class="text-xl font-bold">Academic Hub</h3>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">
+                        Revolutionizing university education through innovative technology solutions for students,
+                        faculty, and administrators.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                            <i class="fab fa-linkedin-in text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold text-white">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="http://127.0.0.1:8000/dashboard"
+                                class="text-gray-300 hover:text-white transition-colors">Dashboard</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Faculty Reviews</a>
+                        </li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Resources</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">CGPA Tracker</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Help & Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold text-white">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Course Management</a>
+                        </li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Grade Tracking</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Faculty Rating</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Resource Sharing</a>
+                        </li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Academic Analytics</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="space-y-4">
+                    <h4 class="text-lg font-semibold text-white">Contact Info</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-map-marker-alt text-blue-400"></i>
+                            <span class="text-gray-300">Dhanmondi, Dhaka, Bangladesh</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-phone text-blue-400"></i>
+                            <span class="text-gray-300">+880 1XXX-XXXXXX</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-blue-400"></i>
+                            <span class="text-gray-300">info@academichub.edu</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-globe text-blue-400"></i>
+                            <span class="text-gray-300">www.academichub.edu</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <div class="text-gray-400 text-sm">
+                        &copy; 2025 Academic Hub. All rights reserved. Made with ❤️ by <span
+                            class="text-blue-400 font-semibold">blackSquad</span>
+                    </div>
+                    <div class="flex space-x-6 text-sm">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Settings page specific functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            // Profile form submission
+            const profileForm = document.getElementById('profileForm');
+            if (profileForm) {
+                profileForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    // Show success message
+                    const button = this.querySelector('button[type="submit"]');
+                    const originalText = button.textContent;
+                    button.textContent = 'Updated!';
+                    button.classList.add('bg-green-600');
+                    button.classList.remove('bg-blue-600');
+
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.classList.remove('bg-green-600');
+                        button.classList.add('bg-blue-600');
+                    }, 2000);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
