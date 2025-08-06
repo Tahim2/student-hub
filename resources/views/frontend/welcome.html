@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Hub - Welcome</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #50C878;
+            --accent-color: #F39C12;
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+            --bg-light: #F8F9FA;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+        }
+
+        .hero-section {
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .btn-custom {
+            background: var(--accent-color);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background: #E67E22;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline-custom {
+            border: 2px solid white;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h1 class="hero-title">Academic Hub</h1>
+                    <p class="hero-subtitle">Your Complete Student Management Platform</p>
+                    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                        <a href="login.html" class="btn btn-custom">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
+                        </a>
+                        <a href="register.html" class="btn btn-outline-custom">
+                            <i class="fas fa-user-plus me-2"></i>Register
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5" style="background: var(--bg-light);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>CGPA Tracking</h4>
+                        <p class="text-muted">Monitor your academic performance with comprehensive CGPA tracking and grade analysis.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4>Course Management</h4>
+                        <p class="text-muted">Manage your courses, assignments, and academic schedules in one place.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4>Faculty Reviews</h4>
+                        <p class="text-muted">Rate and review faculty members to help improve educational quality.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
