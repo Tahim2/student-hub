@@ -143,6 +143,7 @@
             </div>
         </div>
     </section>
+
     <!-- Footer -->
     <footer class="bg-primary dark:bg-gray-800 text-white py-8">
         <div class="container mx-auto px-4">
@@ -306,6 +307,7 @@
             displayReviews('all', '');
             displayModerationReviews();
         });
+
         // Browse Reviews
         document.getElementById('browse-faculty').addEventListener('change', (e) => {
             const value = e.target.value;
@@ -368,6 +370,7 @@
                         alert('Updated review must be at least 10 characters and contain no inappropriate content.');
                     }
                 });
+
                 reviewDiv.querySelector('.hide-review').addEventListener('click', () => {
                     reviews = reviews.map(r => r.id === review.id ? { ...r, hidden: !r.hidden } : r);
                     localStorage.setItem('facultyReviews', JSON.stringify(reviews));
